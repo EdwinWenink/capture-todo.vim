@@ -35,7 +35,7 @@ Plug 'EdwinWenink/capture-todo.vim'
 You need to tell this plugin where your plain text todo file is located.
 This is done by setting the following in your vimrc:
 
-```
+```vim
 let g:todo_location="~/Dropbox/todo.txt"
 ```
 
