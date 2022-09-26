@@ -26,7 +26,7 @@ the file link, just remove it later or ignore it.
 
 When using a plugin manager like `Plug`, add the following to your `vimrc`:
 
-```
+```vim
 Plug 'EdwinWenink/capture-todo.vim'
 ```
 
@@ -60,7 +60,7 @@ Additionally, a default mapping is defined to jump the todo file:
 
 These default mappings can be overridden in your vimrc as follows:
 
-```
+```vim
 nmap <leader>tc <Plug>(CaptureTodo)
 nmap <leader>td <Plug>(GotoTodo)
 ```
