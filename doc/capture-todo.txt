@@ -1,10 +1,20 @@
-# capture-todo.vim
+*capture-todo*  Quickly capture a TODO with a link to the line you are currently editing.
 
-Vim plugin for capturing a TODO with a link to the current line in the current buffer.
+Author: Edwin Wenink <edwinwenink@hotmail.com>
+License: MIT
+
+===============================================================================
+CONTENTS                                                        *todo-contents*
+
+	1. Description................................... |description|
+	2. Options ...................................... |options|
+	3. Usage ........................................ |usage|
+
+===============================================================================
+1. Description                                                    *description*
+
 This plugin is intended for use with plain text todo lists, such as todo.txt.
 This plugin works nicely together with https://github.com/freitass/todo.txt-vim.
-
-## Description
 
 Do you often have small tasks popping up in your thoughts when you are working
 on something? This small plugin helps you quickly capture these TODOs without
@@ -22,45 +32,39 @@ When going through your todo.txt, you can quickly pick up where you left off
 using Vim's default `gF` (go to file) normal mode command. If you do not need
 the file link, just remove it later or ignore it.
 
-## Installation
 
-When using a plugin manager like `Plug`, add the following to your `vimrc`:
-
-```
-Plug 'EdwinWenink/capture-todo.vim'
-```
-
-## Setup
+===============================================================================
+2. Options                                                            *options*
 
 You need to tell this plugin where your plain text todo file is located.
 This is done by setting the following in your vimrc:
 
-```
-let g:todo_location="~/Dropbox/todo.txt"
-```
+    `let g:todo_location="~/Dropbox/todo.txt"`
 
 If you do not set the location, the line above defines the standard behavior.
 
-## Usage
+===============================================================================
+3. Usage                                                                *usage*
 
 This plugin defines a single command `:CaptureTodo`  that accepts arguments.
 For example:
 
-- `:CaptureTodo this is an example TODO`
+    `:CaptureTodo this is an example TODO`
 
-This will capture "this is an example TODO" and append it to the bottom of your
+Will capture "this is an example TODO" and append it to the bottom of your
 TODO file, together with a link to the specific location where you invoked
 the command. This command can be invoked directly or using the default mapping
 
-- `<leader>tc`    Mnenomic: todo capture
+    `<leader>tc`    Mnenomic: todo capture
 
 Additionally, a default mapping is defined to jump the todo file:
 
-- `<leader>td`    Mnemonic: to-do
+    `<leader>td`    Mnemonic: to-do
 
 These default mappings can be overridden in your vimrc as follows:
 
-```
-nmap <leader>tc <Plug>(CaptureTodo)
-nmap <leader>td <Plug>(GotoTodo)
-```
+    `nmap <leader>tc <Plug>(CaptureTodo)`
+    `nmap <leader>td <Plug>(GotoTodo)`
+
+===============================================================================
+vim:ft=help:et:ts=2:sw=2:sts=2:norl
