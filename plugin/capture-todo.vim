@@ -26,6 +26,19 @@ endif
 let g:todo_location = expand(g:todo_location)
 let g:inbox_location = expand(g:inbox_location)
 
+function! s:AppendToFile(to_append, file_location)
+
+    if !filewritable(a:file_location)
+        echoerr "Can't write to location " . a:file_location
+        return
+    endif
+
+    let l:lines = []
+    call extend(l:lines, readfile(a:file_location))
+    call extend(l:lines, a:to_append) 
+    call writefile(l:lines, a:file_location)
+endfunction
+
 function! s:CaptureWithLink(description)
     " Drops todo with date, description and file link at bottom of todo file
     execute 'redir >> ' . g:inbox_location
@@ -36,20 +49,9 @@ endfunction
 
 function! s:SetTodo()
     " Cut the current line and move it to your todo location
-    if !filewritable(g:todo_location)
-        echoerr "Can't write to todo location " . g:todo_location
-        return
-    endif
-
     let l:todo = []
-    let l:lines = []
     call add(l:todo, getline(line(".")))|d
-    " Read in todo file as variable
-    call extend(l:lines, readfile(g:todo_location))
-    " Add the new todo
-    call extend(l:lines, l:todo) 
-    " Write back to file
-    call writefile(l:lines, g:todo_location)
+    call s:AppendToFile(l:todo, g:todo_location)
     echom 'Moved todo to ' . g:todo_location
 endfunction
 
