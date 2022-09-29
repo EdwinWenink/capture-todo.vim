@@ -4,6 +4,8 @@ Vim plugin for capturing a TODO with a link to the current line in the current b
 This plugin is intended for use with plain text todo lists, such as todo.txt.
 This plugin works nicely together with https://github.com/freitass/todo.txt-vim.
 
+Also see `:help capture-todo` after installation.
+
 ## Description
 
 Do you often have small tasks popping up in your thoughts when you are working
@@ -41,6 +43,23 @@ let g:todo_location="~/Dropbox/todo.txt"
 
 If you do not set the location, the line above defines the standard behavior.
 
+You can optionally also set a separate "inbox" file:
+
+```vim
+let g:inbox_location = "~/Dropbox/inbox.todo.txt"
+```
+
+If you do not set your inbox file, the location will be equal to your todo file.
+In this case, captured notes will be written to the inbox file. The idea behind
+this functionality is that the inbox serves as a backlog, so that the todo.txt
+can be used to list things you will do on the short term (for example today or
+this week). This way you can capture all your thoughts without cluttering your
+main todo.txt file.
+
+N.B. it is recommended to name your files following the pattern `*.todo.txt`.
+This way the `todo.txt` Vim plugin will correctly set the filetype to `todo`.
+This plugin is not a filetype plugin and works with any text file.
+
 ## Usage
 
 This plugin defines a single command `:CaptureTodo`  that accepts arguments.
@@ -54,13 +73,24 @@ the command. This command can be invoked directly or using the default mapping
 
 - `<leader>tc`    Mnenomic: todo capture
 
-Additionally, a default mapping is defined to jump the todo file:
+Additionally, a default mapping is defined to jump the todo file or the index file:
 
-- `<leader>td`    Mnemonic: to-do
+- `<leader>td`    Mnemonic: to do
+- `<leader>ti`    Mnenomic: to inbox
 
 These default mappings can be overridden in your vimrc as follows:
 
 ```vim
 nmap <leader>tc <Plug>(CaptureTodo)
 nmap <leader>td <Plug>(GotoTodo)
+nmap <leader>ti <Plug>(GotoTodoInbox)
+```
+
+Two additional commands are defined for moving the TODO on the current line to 
+your inbox file or your todo file. If you have not set your inbox file, the 
+mappings will do the same thing and move the current line to your todo file.
+
+```vim
+nmap <unique> <leader>mt <Plug>(MoveToTodo)
+nmap <unique> <leader>mi <Plug>(MoveToInbox)
 ```
