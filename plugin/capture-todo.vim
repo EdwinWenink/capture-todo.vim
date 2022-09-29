@@ -3,8 +3,6 @@
 " Author:      Edwin Wenink
 " License:     MIT
 
-" TODO refactor with namespace en funcs in autoload, e.g. function! capture#todo#with_link(description)
-
 " This file only needs to be loaded once
 if exists("g:loaded_todo_capture")
     finish
@@ -26,46 +24,17 @@ endif
 let g:todo_location = expand(g:todo_location)
 let g:inbox_location = expand(g:inbox_location)
 
-function! s:AppendToFile(to_append, file_location)
-
-    if !filewritable(a:file_location)
-        echoerr "Can't write to location " . a:file_location
-        return
-    endif
-
-    let l:lines = []
-    call extend(l:lines, readfile(a:file_location))
-    call extend(l:lines, a:to_append) 
-    call writefile(l:lines, a:file_location)
-endfunction
-
-function! s:CaptureWithLink(description)
-    " Drops todo with date, description and file link at bottom of todo file
-    execute 'redir >> ' . g:inbox_location
-    silent echomsg strftime('%Y-%m-%d') a:description fnameescape(expand('%:p')).':'.line('.')
-    silent! redir END
-    echom 'Captured in ' . g:inbox_location
-endfunction
-
-function! s:SetTodo()
-    " Cut the current line and move it to your todo location
-    let l:todo = []
-    call add(l:todo, getline(line(".")))|d
-    call s:AppendToFile(l:todo, g:todo_location)
-    echom 'Moved todo to ' . g:todo_location
-endfunction
-
 nnoremap <Plug>(CaptureTodo) :CaptureTodo 
 nnoremap <Plug>(GotoTodoInbox) :execute ":e" inbox_location<CR>
 nnoremap <Plug>(SetTodo) :SetTodo<CR>
 nnoremap <Plug>(GotoTodo) :execute ":e" todo_location<CR>
 
 if !exists(":CaptureTodo")
-    command! -nargs=1 CaptureTodo :call s:CaptureWithLink("<args>")
+    command! -nargs=1 CaptureTodo :call capture#with_link("<args>")
 endif
 
 if !exists(":SetTodo")
-    command! SetTodo :call s:SetTodo()
+    command! SetTodo :call capture#set_todo()
 endif
 
 if !hasmapto('<Plug>(CaptureTodo)')
