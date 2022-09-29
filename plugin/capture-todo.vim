@@ -26,15 +26,20 @@ let g:inbox_location = expand(g:inbox_location)
 
 nnoremap <Plug>(CaptureTodo) :CaptureTodo 
 nnoremap <Plug>(GotoTodoInbox) :execute ":e" inbox_location<CR>
-nnoremap <Plug>(SetTodo) :SetTodo<CR>
 nnoremap <Plug>(GotoTodo) :execute ":e" todo_location<CR>
+nnoremap <Plug>(MoveToTodo) :MoveToTodo<CR>
+nnoremap <Plug>(MoveToInbox) :MoveToInbox<CR>
 
 if !exists(":CaptureTodo")
-    command! -nargs=1 CaptureTodo :call capture#with_link("<args>")
+    command! -nargs=1 CaptureTodo :call capture#with_link("<args>", g:inbox_location)
 endif
 
-if !exists(":SetTodo")
-    command! SetTodo :call capture#set_todo()
+if !exists(":MoveToTodo")
+    command! MoveToTodo :call capture#move_to(g:todo_location)
+endif
+
+if !exists(":MoveToInbox")
+    command! MoveToInbox :call capture#move_to(g:inbox_location)
 endif
 
 if !hasmapto('<Plug>(CaptureTodo)')
@@ -45,10 +50,14 @@ if !hasmapto('<Plug>(GotoTodoInbox)')
     nmap <unique> <leader>ti <Plug>(GotoTodoInbox)
 endif
 
-if !hasmapto('<Plug>(SetTodo)')
-    nmap <unique> <leader>ts <Plug>(SetTodo)
-endif
-
 if !hasmapto('<Plug>(GotoTodo)')
     nmap <unique> <leader>td <Plug>(GotoTodo)
+endif
+
+if !hasmapto('<Plug>(MoveToTodo)')
+    nmap <unique> <leader>mt <Plug>(MoveToTodo)
+endif
+
+if !hasmapto('<Plug>(MoveToInbox)')
+    nmap <unique> <leader>mi <Plug>(MoveToInbox)
 endif
