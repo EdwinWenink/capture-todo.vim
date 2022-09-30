@@ -71,12 +71,12 @@ This will capture "this is an example TODO" and append it to the bottom of your
 TODO file, together with a link to the specific location where you invoked
 the command. This command can be invoked directly or using the default mapping
 
-- `<leader>tc`    Mnenomic: todo capture
+- `<leader>tc`    Mnemonic: todo capture
 
 Additionally, a default mapping is defined to jump the todo file or the index file:
 
 - `<leader>td`    Mnemonic: to do
-- `<leader>ti`    Mnenomic: to inbox
+- `<leader>ti`    Mnemonic: to inbox
 
 These default mappings can be overridden in your vimrc as follows:
 
