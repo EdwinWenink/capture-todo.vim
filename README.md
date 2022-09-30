@@ -91,6 +91,6 @@ your inbox file or your todo file. If you have not set your inbox file, the
 mappings will do the same thing and move the current line to your todo file.
 
 ```vim
-nmap <unique> <leader>mt <Plug>(MoveToTodo)
-nmap <unique> <leader>mi <Plug>(MoveToInbox)
+nmap <leader>mt <Plug>(MoveToTodo)
+nmap <leader>mi <Plug>(MoveToInbox)
 ```
